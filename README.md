@@ -2,6 +2,10 @@
 
 Un reproductor de música moderno y versátil desarrollado con **Python** y **PyQt6**. Esta aplicación permite gestionar tu biblioteca musical local y disfrutar de contenido directamente desde **YouTube** con capacidades de streaming y descarga.
 
+![Interfaz de ejemplo de Music Player Pro 1](resources/icons/interface-example-1.png)
+
+![Interfaz de ejemplo de Music Player Pro 2](resources/icons/interface-example-2.png)
+
 ## ✨ Características Principales
 
 *   **Reproducción Dual:** Soporte para archivos locales (MP3, FLAC, WAV, M4A, OGG) y URLs de YouTube.
