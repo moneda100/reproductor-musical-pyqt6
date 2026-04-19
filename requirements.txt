@@ -1,0 +1,6 @@
+PyQt6>=6.4.0
+python-vlc>=3.0.12118
+yt-dlp>=2023.7.6
+mutagen>=1.46.0
+requests>=2.31.0
+spotipy>=2.23.0
