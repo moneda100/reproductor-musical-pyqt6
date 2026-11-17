@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-11-09T23:35:31.819404+00:00",
+  "environment": {
+    "python": "3.13.2",
+    "qt": "6.11.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "offscreen": true
+  },
+  "metrics": {
+    "window_build_ms": 283.24,
+    "theme_generation_ms": {
+      "average": 0.74,
+      "max": 1.05
+    },
+    "playlist_1000_tracks_ms": 2.71,
+    "library_1000_entries_ms": 14.9,
+    "library_filter_ms": 27.42,
+    "cover_local_load_ms": 2.29,
+    "cover_placeholder_ms": 0.25,
+    "memory_5000_tracks_peak_mb": 2.6,
+    "window_min_size": {
+      "width": 980,
+      "height": 680
+    },
+    "theme_count": 14,
+    "contrast_min": {
+      "text_main": 10.84,
+      "text_muted": 4.86
+    },
+    "contrast_by_theme": {
+      "dark": {
+        "text_main": 19.17,
+        "text_muted": 8.63
+      },
+      "light": {
+        "text_main": 18.24,
+        "text_muted": 8.04
+      },
+      "cyberpunk": {
+        "text_main": 16.01,
+        "text_muted": 6.8
+      },
+      "nord": {
+        "text_main": 10.84,
+        "text_muted": 7.45
+      },
+      "dracula": {
+        "text_main": 13.36,
+        "text_muted": 5.9
+      },
+      "catppuccin": {
+        "text_main": 11.34,
+        "text_muted": 5.65
+      },
+      "solarized": {
+        "text_main": 12.25,
+        "text_muted": 4.86
+      },
+      "clay_dark": {
+        "text_main": 19.17,
+        "text_muted": 8.63
+      },
+      "clay_light": {
+        "text_main": 18.24,
+        "text_muted": 8.04
+      },
+      "clay_cyberpunk": {
+        "text_main": 16.01,
+        "text_muted": 6.8
+      },
+      "clay_nord": {
+        "text_main": 10.84,
+        "text_muted": 7.45
+      },
+      "clay_dracula": {
+        "text_main": 13.36,
+        "text_muted": 5.9
+      },
+      "clay_catppuccin": {
+        "text_main": 11.34,
+        "text_muted": 5.65
+      },
+      "clay_solarized": {
+        "text_main": 12.25,
+        "text_muted": 4.86
+      }
+    }
+  },
+  "thresholds": {
+    "window_build_ms": 10000,
+    "theme_generation_ms": 200,
+    "playlist_1000_tracks_ms": 2000,
+    "library_1000_entries_ms": 3000,
+    "library_filter_ms": 1000,
+    "cover_local_load_ms": 60,
+    "cover_placeholder_ms": 30,
+    "memory_5000_tracks_peak_mb": 35,
+    "contrast_min": 4.5
+  }
+}

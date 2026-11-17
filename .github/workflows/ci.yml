@@ -1,0 +1,137 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install ruff
+        run: pip install ruff==0.15.15
+      - name: Run ruff
+        run: ruff check .
+
+  test:
+    name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install "PyQt6>=6.6" python-vlc yt-dlp mutagen requests
+          pip install pytest pytest-qt pytest-asyncio ruff
+      - name: Install system dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1 libegl1 libxkbcommon-x11-0 libdbus-1-3 libvlc5 vlc
+      - name: Run tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: pytest -v --tb=short
+
+  qa:
+    name: QA UI (suite + métricas + capturas)
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install "PyQt6>=6.6" python-vlc yt-dlp mutagen requests
+          pip install pytest pytest-qt pytest-asyncio
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgl1 libegl1 libxkbcommon-x11-0 libdbus-1-3 libvlc5 vlc \
+            fonts-dejavu-core fonts-liberation
+      - name: Run QA suite
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest tests/test_ui_qa.py tests/test_web_pwa.py -v --tb=short
+      - name: Generate QA metrics
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python scripts/qa_metrics.py
+      - name: Generate QA screenshots
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python scripts/qa_capture.py
+      - name: Upload QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-ui-report
+          path: |
+            docs/qa/metrics.json
+            screenshots/qa/*.png
+          retention-days: 14
+
+  build-windows:
+    name: Build (Windows, PyInstaller)
+    runs-on: windows-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install "PyQt6>=6.6" python-vlc yt-dlp mutagen requests pyinstaller
+      - name: Build executable
+        run: pyinstaller --noconfirm MusicPlayerPro.spec
+      - name: Smoke test the executable
+        shell: pwsh
+        run: |
+          $env:QT_QPA_PLATFORM = "offscreen"
+          $p = Start-Process -FilePath "dist\MusicPlayerPro\MusicPlayerPro.exe" -PassThru -NoNewWindow
+          Start-Sleep -Seconds 8
+          if ($p.HasExited) { throw "La aplicación se cerró inesperadamente" }
+          Stop-Process -Id $p.Id -Force
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MusicPlayerPro-windows
+          path: dist/MusicPlayerPro
+          retention-days: 7
+
+  build-relay:
+    name: Build relay image
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build docker image
+        run: docker build -f sync_server/Dockerfile -t musicplayerpro-relay:latest .
+      - name: Smoke test the relay
+        run: |
+          docker run -d --name relay -p 8099:8099 musicplayerpro-relay:latest
+          sleep 5
+          curl -fsS http://127.0.0.1:8099/v1/health
+          docker rm -f relay

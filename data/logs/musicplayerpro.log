@@ -1,0 +1,36 @@
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerPlaying: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerPaused: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerStopped: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerEndReached: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerLengthChanged: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerTimeChanged: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerEncounteredError: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerBuffering: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 DEBUG    core.player | No se pudo suscribir a MediaPlayerMediaChanged: 'EventManager' object has no attribute 'on'
+2026-10-29 01:59:08 INFO     services.media_keys | Teclas multimedia del sistema no disponibles en esta plataforma
+2026-10-29 01:59:08 DEBUG    services.smtc_service | RoGetActivationFactory falló (0x-7FFFBFFE) para Windows.Media.Control.GlobalSystemMediaTransportControlsSessionManager
+2026-10-29 01:59:08 INFO     services.smtc_service | SMTC no disponible en este sistema
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerPlaying: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerPaused: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerStopped: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerEndReached: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerLengthChanged: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerTimeChanged: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerEncounteredError: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerBuffering: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:13 DEBUG    core.player | No se pudo suscribir a MediaPlayerMediaChanged: 'EventManager' object has no attribute 'on'
+2026-10-29 02:05:14 INFO     services.media_keys | Teclas multimedia del sistema no disponibles en esta plataforma
+2026-10-29 02:05:14 DEBUG    services.smtc_service | RoGetActivationFactory falló (0x-7FFFBFFE) para Windows.Media.Control.GlobalSystemMediaTransportControlsSessionManager
+2026-10-29 02:05:14 INFO     services.smtc_service | SMTC no disponible en este sistema
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerPlaying: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerPaused: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerStopped: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerEndReached: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerLengthChanged: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerTimeChanged: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerEncounteredError: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerBuffering: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 DEBUG    core.player | No se pudo suscribir a MediaPlayerMediaChanged: 'EventManager' object has no attribute 'on'
+2026-11-06 16:12:59 INFO     services.media_keys | Teclas multimedia del sistema no disponibles en esta plataforma
+2026-11-06 16:12:59 DEBUG    services.smtc_service | RoGetActivationFactory falló (0x-7FFFBFFE) para Windows.Media.Control.GlobalSystemMediaTransportControlsSessionManager
+2026-11-06 16:12:59 INFO     services.smtc_service | SMTC no disponible en este sistema

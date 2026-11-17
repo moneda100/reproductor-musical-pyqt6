@@ -1,0 +1,20 @@
+{
+  "name": "Music Player Pro",
+  "short_name": "MusicPlayerPro",
+  "description": "Control remoto y biblioteca compartida de Music Player Pro",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F0F0F",
+  "theme_color": "#0F0F0F",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

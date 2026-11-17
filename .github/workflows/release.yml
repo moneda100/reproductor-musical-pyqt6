@@ -1,0 +1,81 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Versión a publicar (sin 'v')"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Compilar y publicar
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install "PyQt6>=6.6" python-vlc yt-dlp mutagen requests pyinstaller
+
+      - name: Calcular la versión
+        id: version
+        shell: pwsh
+        run: |
+          if ("${{ github.event.inputs.version }}" -ne "") {
+            $version = "${{ github.event.inputs.version }}"
+          } else {
+            $version = "${{ github.ref_name }}".TrimStart('v')
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Compilar el ejecutable
+        run: pyinstaller --noconfirm MusicPlayerPro.spec
+
+      - name: Generar el instalador
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (Test-Path $iscc) {
+            & $iscc "installer\MusicPlayerPro.iss"
+          } else {
+            Write-Output "Inno Setup no está instalado: se publica solo el ejecutable."
+          }
+
+      - name: Calcular checksums
+        shell: pwsh
+        run: |
+          $files = @()
+          if (Test-Path "dist\installer") { $files += Get-ChildItem "dist\installer\*.exe" }
+          if (Test-Path "dist\MusicPlayerPro\MusicPlayerPro.exe") { $files += Get-Item "dist\MusicPlayerPro\MusicPlayerPro.exe" }
+          $lines = @()
+          foreach ($file in $files) {
+            $hash = (Get-FileHash $file.FullName -Algorithm SHA256).Hash.ToLower()
+            $lines += "$hash  $($file.Name)"
+            Set-Content -Path "$($file.FullName).sha256" -Value "$hash  $($file.Name)" -NoNewline
+          }
+          $lines | Out-File -FilePath "SHA256SUMS.txt" -Encoding utf8
+
+      - name: Publicar el release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Music Player Pro ${{ steps.version.outputs.version }}"
+          tag_name: "v${{ steps.version.outputs.version }}"
+          body_path: RELEASE_NOTES.md
+          files: |
+            dist/installer/*.exe
+            dist/installer/*.exe.sha256
+            dist/MusicPlayerPro/MusicPlayerPro.exe
+            dist/MusicPlayerPro/MusicPlayerPro.exe.sha256
+            SHA256SUMS.txt

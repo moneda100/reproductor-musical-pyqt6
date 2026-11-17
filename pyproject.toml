@@ -1,0 +1,106 @@
+[project]
+name = "musicplayerpro"
+version = "1.2.0-beta"
+description = "Music Player Pro — reproductor de audio local + YouTube con sincronización entre dispositivos (BETA)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Music Player Pro" }]
+keywords = ["music", "player", "pyqt6", "vlc", "ytdlp", "pwa", "beta"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio :: Players",
+]
+
+dependencies = [
+    "PyQt6>=6.6.0,<7",
+    "python-vlc>=3.0.20100",
+    "yt-dlp>=2024.1.1",
+    "mutagen>=1.47.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-qt>=4.4",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+    "pyinstaller>=6.6",
+]
+sync = [
+    "httpx>=0.27",
+    "websockets>=12.0",
+]
+relay = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "argon2-cffi>=23.1",
+    "httpx>=0.27",
+    "websockets>=12.0",
+]
+web = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+]
+lyrics = [
+    "requests>=2.31.0",
+]
+lastfm = [
+    "pylast>=5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/musicplayerpro/musicplayerpro"
+Repository = "https://github.com/musicplayerpro/musicplayerpro"
+
+[project.scripts]
+musicplayerpro = "main:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["core", "ui", "services", "sync"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+qt_api = "pyqt6"
+markers = [
+    "qa: pruebas de calidad de la interfaz (funcionalidad, usabilidad, rendimiento y regresión)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    "web",
+    "sync_server/.venv",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = [
+    "E501",
+    "E741",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]
+"main.py" = ["E402"]
+
